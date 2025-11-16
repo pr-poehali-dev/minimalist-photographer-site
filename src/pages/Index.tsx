@@ -37,6 +37,15 @@ const portfolioImages = [
   }
 ];
 
+const instagramImages = [
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/a64de739-cba6-4f06-a2b5-5957be78e214.jpg",
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/8c4ac0e1-ab9d-476a-b0e2-b42371eec26b.jpg",
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/a0434e8e-6ec3-4b0f-a171-960ca53788c6.jpg",
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/c88798c6-2e52-43c8-aea4-a5e47a6d1b53.jpg",
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/a44d423f-7f1f-40da-9974-0273918e7320.jpg",
+  "https://cdn.poehali.dev/projects/c6c5896e-339e-4548-8b73-3bbbe71e74a1/files/c0b8415e-571f-4162-bebe-764bca7a1a8c.jpg"
+];
+
 const pricingPlans = [
   {
     title: "Базовый",
@@ -250,7 +259,39 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="pricing" className="py-20 px-6 bg-secondary/30">
+      <section className="py-20 px-6 bg-secondary/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Больше работ в Instagram</h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              Следите за новыми фотографиями и закулисьем съёмок
+            </p>
+            <a 
+              href="#" 
+              className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+            >
+              <Icon name="Instagram" size={20} />
+              @photographer
+            </a>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {instagramImages.map((img, index) => (
+              <div 
+                key={index} 
+                className="aspect-square overflow-hidden rounded-lg group cursor-pointer"
+              >
+                <img
+                  src={img}
+                  alt={`Instagram photo ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold mb-12 text-center">Цены</h2>
           <div className="grid md:grid-cols-3 gap-8">
