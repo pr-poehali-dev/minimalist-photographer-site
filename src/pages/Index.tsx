@@ -61,6 +61,7 @@ const pricingPlans = [
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<typeof portfolioImages[0] | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contactForm, setContactForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [reviews, setReviews] = useState<Review[]>([
     {
       id: 1,
@@ -102,6 +103,16 @@ const Index = () => {
     setReviews([review, ...reviews]);
     setNewReview({ name: "", text: "", rating: 5 });
     toast.success("Спасибо за ваш отзыв!");
+  };
+
+  const handleContactSubmit = () => {
+    if (!contactForm.name || !contactForm.email || !contactForm.message) {
+      toast.error("Пожалуйста, заполните обязательные поля");
+      return;
+    }
+
+    toast.success("Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.");
+    setContactForm({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
@@ -337,29 +348,116 @@ const Index = () => {
       </section>
 
       <section id="contact" className="py-20 px-6 bg-secondary/30">
-        <div className="container mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-bold mb-6">Контакты</h2>
-          <p className="text-lg text-muted-foreground mb-8">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-4xl font-bold mb-6 text-center">Контакты</h2>
+          <p className="text-lg text-muted-foreground mb-12 text-center">
             Готовы запечатлеть ваши важные моменты? Свяжитесь со мной!
           </p>
-          <div className="space-y-4">
-            <div className="flex items-center justify-center gap-3">
-              <Icon name="Mail" size={20} className="text-primary" />
-              <a href="mailto:photo@example.com" className="hover:text-primary transition-colors">
-                photo@example.com
-              </a>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Напишите мне</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Имя *</label>
+                      <Input
+                        placeholder="Ваше имя"
+                        value={contactForm.name}
+                        onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Email *</label>
+                      <Input
+                        type="email"
+                        placeholder="your@email.com"
+                        value={contactForm.email}
+                        onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Телефон</label>
+                      <Input
+                        type="tel"
+                        placeholder="+7 (900) 123-45-67"
+                        value={contactForm.phone}
+                        onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Сообщение *</label>
+                      <Textarea
+                        placeholder="Расскажите о вашей фотосессии: дата, тип съёмки, пожелания..."
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                        rows={5}
+                      />
+                    </div>
+                    <Button onClick={handleContactSubmit} className="w-full" size="lg">
+                      Отправить заявку
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-            <div className="flex items-center justify-center gap-3">
-              <Icon name="Phone" size={20} className="text-primary" />
-              <a href="tel:+79001234567" className="hover:text-primary transition-colors">
-                +7 (900) 123-45-67
-              </a>
-            </div>
-            <div className="flex items-center justify-center gap-3">
-              <Icon name="Instagram" size={20} className="text-primary" />
-              <a href="#" className="hover:text-primary transition-colors">
-                @photographer
-              </a>
+
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Контактная информация</h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Icon name="Mail" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Email</h4>
+                    <a href="mailto:photo@example.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      photo@example.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Icon name="Phone" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Телефон</h4>
+                    <a href="tel:+79001234567" className="text-muted-foreground hover:text-primary transition-colors">
+                      +7 (900) 123-45-67
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Icon name="Instagram" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Instagram</h4>
+                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                      @photographer
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Icon name="Clock" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Время работы</h4>
+                    <p className="text-muted-foreground">Пн-Вс: 10:00 - 20:00</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-6 bg-primary/5 rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    Обычно отвечаю в течение 2-3 часов. Если вам нужна срочная консультация, звоните!
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
