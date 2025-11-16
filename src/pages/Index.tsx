@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import Icon from "@/components/ui/icon";
 
@@ -59,6 +60,7 @@ const pricingPlans = [
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<typeof portfolioImages[0] | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([
     {
       id: 1,
@@ -80,6 +82,7 @@ const Index = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
+    setMobileMenuOpen(false);
   };
 
   const handleAddReview = () => {
@@ -107,6 +110,7 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-foreground">Фотограф</h1>
+            
             <div className="hidden md:flex gap-8">
               <button onClick={() => scrollToSection("about")} className="text-sm hover:text-primary transition-colors">
                 Обо мне
@@ -124,6 +128,48 @@ const Index = () => {
                 Контакты
               </button>
             </div>
+
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon">
+                  <Icon name="Menu" size={24} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px]">
+                <div className="flex flex-col gap-6 mt-8">
+                  <button 
+                    onClick={() => scrollToSection("about")} 
+                    className="text-lg hover:text-primary transition-colors text-left"
+                  >
+                    Обо мне
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("portfolio")} 
+                    className="text-lg hover:text-primary transition-colors text-left"
+                  >
+                    Портфолио
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("pricing")} 
+                    className="text-lg hover:text-primary transition-colors text-left"
+                  >
+                    Цены
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("reviews")} 
+                    className="text-lg hover:text-primary transition-colors text-left"
+                  >
+                    Отзывы
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("contact")} 
+                    className="text-lg hover:text-primary transition-colors text-left"
+                  >
+                    Контакты
+                  </button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>
