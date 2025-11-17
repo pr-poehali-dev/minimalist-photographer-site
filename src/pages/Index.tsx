@@ -453,8 +453,8 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Email</h4>
-                    <a href="mailto:denisko_174rus@mail.ru" className="text-muted-foreground hover:text-primary transition-colors">
-                      denisko_174rus@mail.ru
+                    <a href="mailto:photo@example.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      photo@example.com
                     </a>
                   </div>
                 </div>
@@ -465,8 +465,8 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Телефон</h4>
-                    <a href="tel:+79823408990" className="text-muted-foreground hover:text-primary transition-colors">
-                      +7 (982) 340-89-90
+                    <a href="tel:+79001234567" className="text-muted-foreground hover:text-primary transition-colors">
+                      +7 (900) 123-45-67
                     </a>
                   </div>
                 </div>
